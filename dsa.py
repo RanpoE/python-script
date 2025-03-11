@@ -62,3 +62,47 @@ def smaller_nums(nums: list):
 
 
 print(smaller_nums(input2))
+
+
+def min_time_to_visit_points(points: list):
+    res = 0
+    x1, y1 = points.pop()
+    while points:
+        x2, y2 = points.pop()
+        res += max(abs(y2 - y1), abs(x2-x1))
+        x1, y1 = x1, y2
+    return res
+
+
+points = [[1, 1], [3, 4], [-1, 0]]
+
+print(min_time_to_visit_points(points))
+
+
+def spiral_order(matrix):
+    ret = []
+
+    while matrix:
+        # get the first array on matrix
+        ret += (matrix.pop(0))
+        print(matrix)
+        # Iterate the row and get each last element
+        if matrix and matrix[0]:
+            for row in matrix:
+                ret.append(row.pop())
+
+        # Reverse the row/list and add
+        if matrix:
+            ret += (matrix.pop()[::-1])
+
+        # append all first el of all row/list
+        if matrix and matrix[0]:
+            for row in matrix[::-1]:
+                ret.append(row.pop(0))
+
+    return ret
+
+
+test = [[1, 2, 3, 4], [5, 6, 7, 8], [9, 10, 11, 12]]
+
+print(spiral_order(test))
