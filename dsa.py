@@ -109,6 +109,7 @@ test = [[1, 2, 3, 4], [5, 6, 7, 8], [9, 10, 11, 12]]
 print(spiral_order(test))
 
 
+# breadth first search
 def number_of_island(grid):
     if not grid:
         return
@@ -149,3 +150,23 @@ grid = [
 ]
 
 print(number_of_island(grid))
+
+
+# Two pointer approach
+def buy_stock(nums: list):
+    l, r = 0, 1
+    p = 0
+    while r != len(nums):
+        if nums[r] > nums[l]:
+            prof = nums[r] - nums[l]
+            p = max(prof, p)
+        else:
+            l += 1
+
+        r += 1
+
+    return p
+
+
+tt = [7, 1, 5, 2, 6]
+print(buy_stock(tt))
