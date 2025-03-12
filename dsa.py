@@ -1,3 +1,5 @@
+from collections import deque
+
 # Duplicate num exists
 def has_duplicate(nums: list) -> bool:
     if len(set(nums)) == len(nums):
@@ -85,7 +87,6 @@ def spiral_order(matrix):
     while matrix:
         # get the first array on matrix
         ret += (matrix.pop(0))
-        print(matrix)
         # Iterate the row and get each last element
         if matrix and matrix[0]:
             for row in matrix:
@@ -106,3 +107,45 @@ def spiral_order(matrix):
 test = [[1, 2, 3, 4], [5, 6, 7, 8], [9, 10, 11, 12]]
 
 print(spiral_order(test))
+
+
+def number_of_island(grid):
+    if not grid:
+        return
+
+    def bfs(r, c):
+        search_queue = deque()
+        search_queue.append((r, c))
+        while search_queue:
+            row, col = search_queue.popleft()
+            directions = [[1, 0], [-1, 0], [0, 1], [0, -1]]
+
+            for dr, dc in directions:
+                r, c = row+dr, col+dc
+
+                if (r in range(rows) and c in range(cols) and grid[r][c] == '1' and (r, c) not in visited):
+                    search_queue.append((r, c))
+                    visited.add((r, c))
+
+    count = 0
+    rows = len(grid)
+    cols = len(grid[0])
+    visited = set()
+
+    for row in range(rows):
+        for col in range(cols):
+            if grid[row][col] == '1' and (row, col) not in visited:
+                bfs(row, col)
+                count += 1
+
+    return count
+
+
+grid = [
+    ["1", "1", "1", "1", "0"],
+    ["1", "1", "0", "1", "0"],
+    ["1", "0", "0", "0", "0"],
+    ["1", "1", "0", "0", "0"]
+]
+
+print(number_of_island(grid))
