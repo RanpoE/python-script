@@ -110,6 +110,7 @@ print(spiral_order(test))
 
 
 # breadth first search
+# BFS -> seaches from children nodes to grandchildren nodes
 def number_of_island(grid):
     if not grid:
         return
@@ -140,6 +141,7 @@ def number_of_island(grid):
                 count += 1
 
     return count
+# Time complexity -> O(4 * n* m) = O(n*m)
 
 
 grid = [
@@ -153,6 +155,11 @@ print(number_of_island(grid))
 
 
 # Two pointer approach
+# Time complexity -> O(n)
+# Greedy algorithm -> a type of optimization algorithm that makes locally optimal choices at each step
+# to find a globally optimal solution. It operates on the principle of "taking the best option now"
+# without considering the long-term consequences.
+
 def buy_stock(nums: list):
     l, r = 0, 1
     p = 0
@@ -170,3 +177,27 @@ def buy_stock(nums: list):
 
 tt = [7, 1, 5, 2, 6]
 print(buy_stock(tt))
+
+
+def sorted_squares(nums: list):
+    # sqr = [n ** 2 for n in nums]
+    # sqr.sort()
+    # Two pointers O(n)
+    sqr = deque()
+    l, r = 0, len(nums) - 1
+
+    while l <= r:
+        if abs(nums[l]) < abs(nums[r]):
+            sqr.appendleft((nums[r] ** 2))
+            r -= 1
+        else:
+            sqr.appendleft((nums[l] ** 2))
+            l += 1
+
+    return list(sqr)
+
+
+n = [-4, -1, 0, 3, 10]
+print(sorted_squares(n))
+# Iteration O(n)
+# Sorting (O (n log(n)))
