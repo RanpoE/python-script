@@ -48,6 +48,8 @@ input1 = [4, 2, 1]
 input2 = [9, 6, 4, 2, 3, 5, 7, 0, 1, 1]
 input3 = [0, 1, 3]
 
+print(two_sum(input1, 3))
+
 
 # How many nums are smaller than
 def smaller_nums(nums: list):
@@ -201,3 +203,21 @@ n = [-4, -1, 0, 3, 10]
 print(sorted_squares(n))
 # Iteration O(n)
 # Sorting (O (n log(n)))
+
+
+def two_sum_p2(nums, target):
+    l, r = 0, len(nums) - 1
+    while l < r:
+        int_sum = nums[l] + nums[r]
+        if int_sum == target:
+            return {l + 1, r + 1}
+
+        if int_sum < target:
+            l += 1
+        else:
+            r -= 1
+
+
+test1 = [2,7,11,15]
+
+print(two_sum_p2(test1, 9))
