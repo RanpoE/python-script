@@ -218,6 +218,25 @@ def two_sum_p2(nums, target):
             r -= 1
 
 
-test1 = [2,7,11,15]
+test1 = [2, 7, 11, 15]
 
 print(two_sum_p2(test1, 9))
+
+
+def three_sum(nums, target):
+    for i, n in enumerate(nums):
+        l, r = 0, len(nums) - 1
+        while l < r:
+            int_sum = nums[l] + nums[r] + n
+            if int_sum == target and l != i and r != i:
+                return {nums[l], nums[r], n}
+
+            if int_sum < target:
+                l += 1
+            else:
+                r -= 1
+
+
+test2 = [1, 2, 3, 4]
+
+print(three_sum(test2, 7))
