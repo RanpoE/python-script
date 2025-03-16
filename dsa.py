@@ -224,19 +224,89 @@ print(two_sum_p2(test1, 9))
 
 
 def three_sum(nums, target):
+    # Unrestricted
+    combo = []
     for i, n in enumerate(nums):
         l, r = 0, len(nums) - 1
         while l < r:
             int_sum = nums[l] + nums[r] + n
             if int_sum == target and l != i and r != i:
-                return {nums[l], nums[r], n}
-
+                combo.append([nums[l], nums[r], n])
             if int_sum < target:
                 l += 1
             else:
                 r -= 1
 
+    return combo
+
+
+def threeSum(nums):
+    # Restricted
+    triplets = []
+    nums.sort()
+    for idx, val in enumerate(nums):
+        if (idx > 0 and val == nums[idx - 1]):
+            continue
+
+        l, r = idx + 1, len(nums) - 1
+
+        while l < r:
+            print(r)
+            cur_sum = val + nums[l] + nums[r]
+
+            if cur_sum > 0:
+                r -= 1
+            elif cur_sum < 0:
+                l += 1
+
+            else:
+                triplets.append([val, nums[l], nums[r]])
+                l += 1
+
+                # Keep re-evaluating the remaining
+                while l < r and nums[l] == nums[l-1]:
+                    l += 1
+    return triplets
+
 
 test2 = [1, 2, 3, 4]
+mock = [-1, 0, 1, 2, -1, -4]
 
-print(three_sum(test2, 7))
+print(three_sum(test2, 8))
+print(threeSum(mock))
+
+
+def num_is(grid):
+    if not grid:
+        return
+
+    def bfs(r, c):
+        qu = deque()
+        qu.append((r, c))
+
+        while qu:
+            gr, gc = qu.popleft()
+
+            gdir = [[1, 0], [-1, 0], [0, 1], [0, -1]]
+
+            for xdir, ydir in gdir:
+                sr, sc = gr + xdir, gc + ydir
+                if (sr in range(rows) and sc in range(cols) and grid[sr][sc] == '1' and (sr, sc) not in visited):
+                    qu.append((sr, sc))
+                    visited.add((sr, sc))
+
+    island = 0
+    rows = len(grid)
+    cols = len(grid[0])
+    visited = set()
+
+    for row in range(rows):
+        for col in range(cols):
+            if grid[row][col] == '1' and (row, col) not in visited:
+                bfs(row, col)
+                island += 1
+
+    return island
+
+
+print(num_is(grid))
