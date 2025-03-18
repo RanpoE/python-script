@@ -1,5 +1,6 @@
 from collections import deque
 
+
 # Duplicate num exists
 def has_duplicate(nums: list) -> bool:
     if len(set(nums)) == len(nums):
@@ -251,7 +252,6 @@ def threeSum(nums):
         l, r = idx + 1, len(nums) - 1
 
         while l < r:
-            print(r)
             cur_sum = val + nums[l] + nums[r]
 
             if cur_sum > 0:
@@ -310,3 +310,20 @@ def num_is(grid):
 
 
 print(num_is(grid))
+
+
+def valid_pairs(nums: list):
+    # Check if all item in the list has a pair
+    nums.sort()
+    print(len(nums))
+    for i in range(0, len(nums) - 1 , 2):
+        print(i)
+        if nums[i] != nums[i+1]:
+            # continue
+            return False
+    return True
+
+
+m1 = [1, 1, 2, 2, 3, 3, 4, 4]
+
+print(valid_pairs(m1))
