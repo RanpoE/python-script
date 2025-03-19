@@ -316,8 +316,7 @@ def valid_pairs(nums: list):
     # Check if all item in the list has a pair
     nums.sort()
     print(len(nums))
-    for i in range(0, len(nums) - 1 , 2):
-        print(i)
+    for i in range(0, len(nums) - 1, 2):
         if nums[i] != nums[i+1]:
             # continue
             return False
@@ -327,3 +326,39 @@ def valid_pairs(nums: list):
 m1 = [1, 1, 2, 2, 3, 3, 4, 4]
 
 print(valid_pairs(m1))
+
+
+def b_sort(nums: list):
+    for i in range(len(nums) - 1):
+        for ii in range(i+1, len(nums) - 1):
+            if nums[i] > nums[ii]:
+                nums[i], nums[ii] = nums[ii], nums[i]
+
+    return nums
+
+
+uns = [3, 1, 2, 5]
+
+print(b_sort(nums=uns))
+
+
+def longest_mountain(nums: list):
+    ret = 0
+    for i in range(1, len(nums)-1):
+        if nums[i-1] < nums[i] > nums[i+1]:
+            l = r = i
+
+            while l >= 0 and nums[l] > nums[l-1]:
+                l -= 1
+
+            while r < len(nums) and nums[r] > nums[r+1]:
+                r += 1   
+            ret = max(ret, r-1 + 1)
+
+    return ret
+
+
+test_mt = [2, 1, 4, 7, 3, 2, 5]
+test_m2 = [2, 2, 2]
+
+print(longest_mountain(test_mt))
