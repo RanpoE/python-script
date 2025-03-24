@@ -398,7 +398,7 @@ def minimum_diff(arr: list):
 
     print(min_diff, " min")
     for i in range(1, len(arr)):
-        if (arr[1-i] - arr[i] == min_diff):
+        if (arr[i] - arr[i-1] == min_diff):
             res.append([arr[1-i], arr[i]])
 
     return res
