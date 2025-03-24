@@ -362,3 +362,48 @@ test_mt = [2, 1, 4, 7, 3, 2, 5]
 test_m2 = [2, 2, 2]
 
 print(longest_mountain(test_mt))
+
+
+def contains_dup(nums: list, k: int):
+    # Will use sliding window approach
+
+    # - Arrays/Linked list/Linear data/
+    # - Finding max/min substring
+
+    # Two pointer was useful for sorted array
+    seen = set()
+    for i, num in enumerate(nums):
+        if num in seen:
+            return True
+        seen.add(num)
+        if len(seen) > k:
+            seen.remove(nums[i-k])
+
+    print(seen)
+    return False
+
+
+test_dup = [1, 2, 3, 1]
+
+print(contains_dup(test_dup, 3))
+
+
+def minimum_diff(arr: list):
+    arr.sort()
+
+    min_diff = float('inf')
+    for i in range(1, len(arr)):
+        min_diff = min(min_diff, arr[i] - arr[i-1])
+    res = []
+
+    print(min_diff, " min")
+    for i in range(1, len(arr)):
+        if (arr[1-i] - arr[i] == min_diff):
+            res.append([arr[1-i], arr[i]])
+
+    return res
+
+
+test_min = [4, 2, 3, 5]
+
+print(minimum_diff(test_min))
